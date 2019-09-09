@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Console Tricks!</title>
+</head>
+<body>
+
+  <p onClick="makeGreen()">×BREAK×DOWN×</p>
+
+  <script>
+    const dogs = [
+      { name: 'Snickers', age: 2 },
+      { name: 'hugo', age: 8 },
+      { name: 'Lienarmos', age: 42 },
+      { name: 'Poeltarch', age: 108 }
+    ];
+    const p = document.querySelector('p');
+
+    function makeGreen() {
+      const p = document.querySelector('p');
+      p.style.color = '#c0ff33';
+      p.style.fontSize = '50px';
+    }
+
+    // ///////////////////////// //
+    // Expression on the Console //
+    // ///////////////////////// //
+    //
+		//______________________________________________________________________________________| This  whole page is just an  exhibition of
+    // Regular //...........................................................................| _ different console display functions
+      console.log('ɸ'); //..................................................................|
+    // Interpolated //......................................................................| This is string interpolation without the use of string literals
+      console.log('This is a string, %s, right?', 'ᴥ'); //..................................| _ Similar to `${it}`, %s is the interpolation target
+    // Styled //............................................................................| Console output may be formatted by using the
+      console.log('%c Beautifill!!', 'background:yellow; text-shadow: 6px 6px 0 violet'); //| _ %c tag and describing the style
+    // warning! //..........................................................................| Warnings show up in the console with a specific visual style.
+      console.warn('ohNononono!NOthanks!'); //..............................................|
+    // Error :| //..........................................................................| Errors are much like warnings.
+      console.error('FOCK!!'); //...........................................................|
+    // Info //..............................................................................|
+      console.info('That you exist is unverifiable'); //....................................|
+    // Testing //...........................................................................| Assertions only display if they return false
+      console.assert(p.classList.contains('Morphᴂ'), 'Wrong-Ɵ'); //.........................| _ The first argument is the condition; the second, the message.
+    // clearing //..........................................................................| Exactly like it sounds. Clearing the display take the
+      // console.clear(); //................................................................| _ exhibition out of the whole thing, but it's here anyway.
+    // Viewing DOM Elements //..............................................................| Can grab a detailed list of the properties of
+      console.dir(p); //....................................................................| _ any element it can grab.
+    // Grouping together //.................................................................|
+      dogs.forEach(dog => { //..............................................................| Sometimes, a series of logs is useful for debugging,
+        console.group(`${dog.name}`); //....................................................| _ but a stack of logs can get messy quickly. Declare
+          console.log(`You are pleased to meet ${dog.name}`); //............................| _ a console group with a string as the argument to
+          console.log(`${dog.name} is ${dog.age} years older than you`); //.................| _ console.group(), stack the logs under the declaration
+          console.log(`${dog.name} is certain to take for what is most precious to you`); //| _ and close the group using
+        console.groupEnd(); //..............................................................| _ console.groupEnd().
+      }); //................................................................................|
+    // counting //..........................................................................|
+      console.count('drops'); //............................................................| Console.count Keeps a tally of the given element
+      console.count('buckets'); //..........................................................|
+      console.count('buckets'); //..........................................................|
+      console.count('buckets'); //..........................................................|
+      console.count('drops'); //............................................................|
+      console.count('drops'); //............................................................|
+      console.count('drops'); //............................................................|
+      console.count('buckets'); //..........................................................|
+      console.count('buckets'); //..........................................................|
+      console.count('drops'); //............................................................|
+      console.count('buckets'); //..........................................................|
+      console.count('buckets'); //..........................................................|
+      console.count('drops'); //............................................................|
+    // timing //............................................................................|
+      console.time('measuring'); //.........................................................| The time elapsed during an operation can be
+        console.count('drops'); //..........................................................| _ tracked using .time()
+        console.count('buckets'); //........................................................| _ both .time() and .group() have similar structure
+        console.count('buckets'); //........................................................| _ the function is fed a label string to identify
+        console.count('buckets'); //........................................................| _ it. The function is called and begins a timer
+        console.count('drops'); //..........................................................| _ the portion of the code being measured follows
+        console.count('drops'); //..........................................................| _ the timer is stopped with a call to
+        console.count('drops'); //..........................................................| _ timeEnd() which has the same string argument
+        console.count('buckets'); //........................................................| _ the name string lets the function know what
+        console.count('buckets'); //........................................................| _ timer to stop.
+        console.count('drops'); //..........................................................|
+        console.count('buckets'); //........................................................|
+        console.count('buckets'); //........................................................|
+        console.count('drops'); //..........................................................|
+      console.timeEnd('measuring'); //......................................................|
+    // table //.............................................................................| Table is awful for design, but great for
+      console.table(dogs);  //..............................................................| _ debugging
+  </script>
+</body>
+</html>
