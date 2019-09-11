@@ -2,7 +2,7 @@
 
 30 javascrript projects in 30 days
 
-I did this wrote all this code in September, so welcome to **_JavaScriptember_**.
+I wrote this code in September, so welcome to **_JavaScriptember_**.
 
 These projects were inspired by and written after [javascript30.com](https://javascript30.com/).
 
