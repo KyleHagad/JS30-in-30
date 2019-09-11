@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HTML5 Brush & Canvas</title>
+</head>
+<style>
+  html, body {
+    margin: 0;
+  }
+</style>
+<body>
+  <canvas id="draw" width="800" height="800"></canvas>
+
+  <script>
+    const canvas = document.querySelector('#draw'); // ..........<-Grabs the canvas to be operated upon-<
+    const ctx = canvas.getContext('2d'); // .....................<-Grab the context out of that canvas that our operations have ground -<
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    ctx.strokeStyle = '#BADA55';
+    ctx.lineJoin = 'round'; // ..................................<-There are other stylistic options that would be adjusted here
+    ctx.lineCap = 'round'; // ...................................<-And here
+    ctx.lineWidth = 6; // .......................................<-Brush initial width >-Its a paint brush, they are _all_ stylistic options
+    ctx.globalCompositeOperation = 'multiply'; // ...............<-Choose a blend mode with this
+    let isDrawing = false;
+    let lastX = 0, lastY = 0;
+    let hue = 0;
+    let direction = true;
+    function draw(e){
+      if(!isDrawing) return; // .................................<-Kill-Switch-<  Ends draw() when not drawing
+      ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+      ctx.beginPath();
+      ctx.moveTo(lastX, lastY);
+      ctx.lineTo(e.offsetX, e.offsetY);
+      ctx.stroke();
+      hue >= 360 ? hue = 0 : hue++;
+      direction === true ? ctx.lineWidth++ : ctx.lineWidth--; // <-Undulator-< Changes the size of the brush
+      if(ctx.lineWidth >= 108){ direction = false }
+      if(ctx.lineWidth <= 3){ direction = true }
+      [lastX, lastY] = [e.offsetX, e.offsetY];
+    }
+    canvas.addEventListener('mouseup', () => isDrawing = false);
+    canvas.addEventListener('mouse', () => isDrawing = false);
+    canvas.addEventListener('mousedown', e => {
+      isDrawing = true;
+      [lastX, lastY] = [e.offsetX, e.offsetY];
+    });
+    canvas.addEventListener('mousemove', draw);
+  </script>
+</body>
+</html>
