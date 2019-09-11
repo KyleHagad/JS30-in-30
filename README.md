@@ -1,4 +1,9 @@
 # JavaScript 30-in-30
-*Hosted by Wesbos*
-I did this wrote all this code in September, so Welcome to *Javascriptember*.
 
+30 javascrript projects in 30 days
+
+I did this wrote all this code in September, so welcome to **_JavaScriptember_**.
+
+These projects were inspired by and written after [javascript30.com](https://javascript30.com/).
+
+_Thank you, Wes Bos_
