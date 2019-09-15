@@ -201,10 +201,10 @@
 </div>
 </body>
 <script>
-  function debounce(func, wait = 20, immediate = true) {
-    let timeout;
-    return function() {
-      const context = this, args = arguments;
+  function debounce(func, wait = 20, immediate = true) { //<-<--<-debounce is an concept for limiting the
+    let timeout; //<-<-frequency that a function fires. Oftimes, we'll need to watch for an event that may
+    return function() { //<-<-trigger rapidly, but the function that that event triggers ought not fire so
+      const context = this, args = arguments; //<-<-often, for any number of reasons.
       const later = function() {
         timeout = null;
         if (!immediate) func.apply(context, args);
@@ -215,5 +215,25 @@
       if (callNow) func.apply(context, args);
     };
   }
+
+	const slidingImages = document.querySelectorAll('.slide-in');
+
+  function slideStatus() {
+		slidingImages.forEach((image)=> {
+			const
+				imageMidpoint = (window.scrollY + window.innerHeight) - (image.height / 2),
+				imageBottom = image.offsetTop + image.height,
+				halfOnScreen = imageMidpoint > image.offsetTop,
+				imageOnScreen = window.scrollY < imageBottom;
+
+			if(halfOnScreen && imageOnScreen) {
+				image.classList.add('active');
+			} else {
+				image.classList.remove('active');
+			}
+		})
+	}
+
+	document.addEventListener('scroll', debounce(slideStatus));
 </script>
 </html>
