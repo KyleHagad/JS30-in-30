@@ -7,7 +7,8 @@
 <body>
 
 <script>
-  // start with strings, numbers and booleans
+  // ________|-Starting with strings, numbers and booleans-|
+  console.log('·········Strings, Numbers, Boolean Example·········');
   let
     age = 108, agePrime = age,
     point = 'current', temp = point,
@@ -15,49 +16,87 @@
   age *= 2;
   point = 'next';
   booleanCheck = true;
+  console.log('Reference: value; Copy: value');
   console.log(`Age: ${age}; AgePrime ${agePrime}`);
-  console.log(`Point at: ${point}; Previous point: ${temp}`);
-  console.log(`Boolean: ${booleanCheck}; Boolean echo ${booleanEcho}`);
-  // Let's say we have an array
+  console.log(`Point-At: ${point}; Previous-Point: ${temp}`);
+  console.log(`Boolean: ${booleanCheck}; Boolean-Echo ${booleanEcho}`);
+
+  console.log('·········Arrays·········');
+  // _____________________________________________|-Arrays-| Let's say we have an array of 'players':
   const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
-  // and we want to make a copy of it.
+  const teamA = players; // ·······························| and we want to make a copy of it.
 
-  // You might think we can just do something like this:
+  teamA[3] = 'Lux';// ·····································| You might think we do something like this
+  console.log(`Players: ${players}; Team: ${teamA}`); // ··| what happens when we update that array?
 
-  // however what happens when we update that array?
+  console.log(`Team: ${teamA}`); // ·······················| now here is a problem!
+  console.log(`Players: ${players}`);// ···················| oh no - we have edited the original array too!
+  // ····················································|?| That is an array reference, not a copy
+  // ······················································| They both point to the same array!
+  const
+    teamB = Array.from(players), // ·······················| how do we fix this? We take a copy instead!
+    teamC = players.slice(), // ···························| another way, using .slice()
+    teamD = [].concat(players), // ························| or a new array concat'ed with the old one
+    teamE = [...players]; // ······························| or use the new ES6 Spread
 
-  // now here is the problem!
+  teamB[2] = 'Zax'; // ····································| Updating the copies, and the original remains
+  teamC[1] = 'Palas';
+  teamD[0] = 'Wren';
+  teamE[4] = 'Adal';
+  console.log(`TeamA: ${teamA}`);
+  console.log(`TeamB: ${teamB};`);
+  console.log(`TeamC: ${teamC};`);
+  console.log(`TeamD: ${teamD};`);
+  console.log(`TeamE: ${teamE};`);
+  console.log(`Still, TeamA: ${teamA}`);
 
-  // oh no - we have edited the original array too!
-
-  // Why? It's because that is an array reference, not an array copy. They both point to the same array!
-
-  // So, how do we fix this? We take a copy instead!
-
-  // one way
-
-  // or create a new array and concat the old one in
-
-  // or use the new ES6 Spread
-
-  // now when we update it, the original one isn't changed
-
-  // The same thing goes for objects, let's say we have a person object
-
-  // with Objects
-  const person = {
-    name: 'Wes Bos',
-    age: 80
+  console.log('·········Objects·········');
+  // ____________________________________________|-Objects-| say we have a person object:
+  const
+    person = {
+      name: 'Wes Bos',
+      age: 80,
+    };
+  const captainA = person; // ·····························| and think we make a copy...
+  captainA.number = 108;
+  console.log(`Captain.number: ${captainA.number};`); // ··| Now {captain} has a number
+  console.log(`Person.number: ${person.number};`); // ···|?| How did {person} get a number?
+  // ······················································| Captain is a reference!
+  const
+    captainB = // ·······································|?| how do we take a copy instead?
+      Object.assign( // ···································| Create an Object from scratch
+        {}, // ············································| Initialize an empty Object
+        person, // ········································| Add {person}'s values
+        { age: 99, number: 101,} // ·······················| Set the values we want to be different
+      );
+  const captainC = {...person}; // ························| We could Object ...spread in the values
+  captainC.number = 30; // ································| Keep in mind Object...spread has yet to be
+  // ······················································| ratified (as of 2019ᴄᴇ)
+  console.log(`Person: ${JSON.stringify(person)}`);
+  console.log(`CaptainA: ${JSON.stringify(captainA)}`);
+  console.log(`CaptainB: ${JSON.stringify(captainB)}`);
+  console.log(`CaptainC: ${JSON.stringify(captainC)}`);
+  // ····················································|!| All the above is true for only one level deep!
+  // _____________________________________|-Nested Objects-| What happens with nested structures?
+  const eggon = {
+    name: 'Eggon',
+    age: 720,
+    location: {
+      temporal: '2122ᴄᴇ',
+      spatial: [
+        ['12west', '24South'],
+        ['9east', '9South'],
+      ],
+    }
   };
-
-  // and think we make a copy:
-
-  // how do we take a copy instead?
-
-  // We will hopefully soon see the object ...spread
-
-  // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
-
+  const dev = Object.assign( // ···························| Because {eggon} is nested, it is copied
+    {},
+    eggon,
+  );
+  const devB = JSON.parse(JSON.stringify(eggon)); // ······| A Dirty-Quick deepClone (not recommended)
+  dev.name = 'Torna';
+  console.log(`Dev: ${JSON.stringify(dev)}`); // ··········| {dev} is a copy of {eggon}, not a reference
+  console.log(`Eggon: ${JSON.stringify(eggon)}`); // ······| Eggon's name never changed!
 </script>
 
 </body>
