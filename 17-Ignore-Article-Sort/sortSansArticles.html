@@ -40,12 +40,37 @@
   }
 </style>
 <body>
-  <ul id="bands"></ul>
+<ul id="bands"></ul>
 
 <script>
-const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
+  const
+    bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'],
+    bandList = document.getElementById('bands');
 
+  bands.forEach((band, index) => {
+    const
+      articles = ['A', 'An', 'The'],
+      words = band.split(' '),
+      initialWord = words[0];
 
+    if (articles.includes(initialWord)) {
+      let lastWord = words[words.length - 1];
+      words[words.length - 1] = `${lastWord},`;
+      words.shift();
+      words.push(initialWord);
+      bands[index] = words.join(' ');
+    }
+  });
+
+  bands.sort();
+
+  bands.forEach(band => {
+    const
+      listItem = document.createElement('li'),
+      textNode = document.createTextNode(`${band}`);
+    listItem.appendChild(textNode);
+    bandList.appendChild(listItem);
+  })
 </script>
 </body>
 </html>
