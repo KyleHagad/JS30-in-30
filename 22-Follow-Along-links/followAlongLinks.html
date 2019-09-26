@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>👀👀👀Follow Along Nav</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="linkStyles.css">
 </head>
 <body>
 
@@ -34,9 +34,17 @@
   document.body.append(highlight);
 
   function highlightLink() {
-    const linkCoords = this.getBoundingClientRect();
-    highlight.style.width = `${linkCoords.width}`;
-    highlight.style.height = `${linkCoords.height}`;
+    const
+      linkCoords = this.getBoundingClientRect(),
+      highlightCoords = {
+        width: linkCoords.width,
+        height: linkCoords.height,
+        top: linkCoords.top + window.scrollY,
+        left: linkCoords.left + window.scrollX,
+      };
+    highlight.style.width = `${highlightCoords.width + 6}px`;
+    highlight.style.height = `${highlightCoords.height}px`;
+    highlight.style.transform = `translate(${highlightCoords.left}px, ${highlightCoords.top}px)`;
     console.log(linkCoords);
   }
 
